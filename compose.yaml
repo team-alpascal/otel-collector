@@ -1,0 +1,20 @@
+services:
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.128.0
+    container_name: otel-collector
+    volumes:
+      - ./otel-config.yaml:/etc/otelcol-contrib/config.yaml
+      - ${LOG_PATH}:/logs
+    ports:
+      - 8888:8888 # Prometheus metrics exposed by the Collector
+      - 8889:8889 # Prometheus exporter metrics
+      # - 13133:13133 # health_check extension
+      - 4317:4317 # OTLP gRPC receiver
+      - 4318:4318 # OTLP http receiver
+    command: ["--config=/etc/otelcol-contrib/config.yaml"]
+    networks:
+      - observability
+
+networks:
+  observability:
+    external: true
