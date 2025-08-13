@@ -19,6 +19,24 @@ TEMPO_ENDPOINT=<IP Address>:4317
 LOKI_ENDPOINT=<IP Address>:3100/loki/api/v1/push
 ```
 
+## Starting the Collector
+Prerequisites
+- You'll need a local installation of Docker and Docker Compose and to have docker desktop open. 
+
+1. Git clone this repository outside your application. 
+2. To emit enriched logs to the collector, you'll need to store your logs in a file in your application. 
+    Then you'll need to mount the path to that file within the collector.
+    See "Setting things up in Consumer App" for more details 
+3. In the top level of the Collector directory, add a .env file containing the following:
+    `LOG_PATH=<Path to your logs file here, remove brackets>`
+  Example path:
+    `LOG_PATH=../../your-app/logs`
+4. From the terminal, navigate to the `otel-collector` directory
+5. Enter the following:
+  `docker compose up`
+  Note: This currently spins them up locally. 
+  Note: This will raise an error if you haven't set up your logging yet. 
+
 ## Local Deployment
 First, run `docker compose up` for the observability backend. Then, run `docker compose up` in this otel-collector directory to spin up the collector.
 
