@@ -12,3 +12,9 @@ services:
       - 4317:4317 # OTLP gRPC receiver
       - 4318:4318 # OTLP http receiver
     command: ["--config=/etc/otelcol-contrib/config.yaml"]
+    networks:
+      - observability
+
+networks:
+  observability:
+    external: true
