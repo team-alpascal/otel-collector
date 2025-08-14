@@ -63,12 +63,10 @@ exporters:
     endpoint: "0.0.0.0:8889"
   otlp/tempo:
     endpoint: "${TEMPO_ENDPOINT}"
-    # endpoint: "tempo:4317"
     tls:
       insecure: true
   loki:
     endpoint: "${LOKI_ENDPOINT}"
-    # endpoint: "http://loki:3100/loki/api/v1/push"
 
   debug:
     verbosity: detailed
